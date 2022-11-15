@@ -68,7 +68,7 @@ export default {
     mounted() {
         console.log(this.$store.state.user.user.id);
         
-        window.Echo.channel('user' + this.$store.state.user.user.id).listen('.message', (e) => {
+        window.Echo.channel('user_' + this.$store.state.user.user.id).listen('.message', (e) => {
             this.taleList.push(e)
         });
     },
