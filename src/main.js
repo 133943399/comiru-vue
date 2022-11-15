@@ -17,7 +17,7 @@ window.Echo = new Echo({
     encrypted: true
 });
 Vue.use(window.Echo)
- 
+
 Vue.config.productionTip = false;
 
 Vue.use(VueLazyload, {
