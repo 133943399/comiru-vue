@@ -26,11 +26,6 @@ const routes = [
         path: '/register',
         component: () => import('@/views/login/register'),
         meta: {hide: true, title: '老师注册'}
-    },
-    {
-        path: '/line',
-        component: () => import('@/views/login/line'),
-        meta: {hide: true, title: 'Line'}
     }
 ];
 

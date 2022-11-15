@@ -92,24 +92,9 @@ export default {
         },
         lineLogin() {
             this.$http.get('/login/line', this.form).then(res => {
-                const code = res.status;
-                const data = res.data;
-                const message = res.statusText;
-                console.log(code)
-
-                this.loading = false;
-                if (code === 200) {
-                    console.log(data)
-                    window.location.href = data
-
-                } else {
-                    console.log(data)
-
-                    this.$message.error(message);
-                }
+                window.location.href = res.data.url
             }).catch(e => {
                 console.log(e);
-                this.loading = false;
                 this.$message.error('网络错误');
             });
         }
