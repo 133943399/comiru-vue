@@ -21,7 +21,7 @@
     "jwchat": "^1.0.11",
     "laravel-echo": "^1.14.1",
     "nprogress": "^0.2.0",
-    "pusher-js": "7.4.1",
+    "pusher-js": "^7.4.1",
     "serve-static": "^1.15.0",
     "socket.io": "^2.2.0",
     "vue": "^2.6.11",
