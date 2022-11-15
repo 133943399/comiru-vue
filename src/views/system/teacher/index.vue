@@ -14,7 +14,7 @@
                         align="center" />
                     <el-table-column prop="status" label="关注" width="75px" sortable="custom" :resizable="false">
                         <template slot-scope="{row}">
-                            <el-switch v-model="row.status" @change="editStatus(row)" :active-value="1"
+                            <el-switch v-model="row.follow" @change="editStatus(row)" :active-value="1"
                                 :inactive-value="2" />
                         </template>
                     </el-table-column>
@@ -58,7 +58,7 @@ export default {
                 if (res.status === 200) {
                     this.$message({ type: 'success', message: res.data.data.message });
                 } else {
-                    row.status = !row.status ? 2 : 1;
+                    row.follow = !row.follow ? 1 : 0;
                     this.$message.error(res.data.data.message);
                 }
                 this.$refs.table.reload();
