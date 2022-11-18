@@ -4,8 +4,8 @@
 export default {
     version: '1.0',
     name: 'comiru',  // 项目名称
-    // baseURL: 'https://test-comiru.herokuapp.com',  // 接口地址
     baseURL: 'https://test-comiru.herokuapp.com',  // 接口地址
+    // baseURL: 'http://comiru.com',  // 接口地址
     whiteList: ['/login', '/forget','/register','/line/login'],  // 路由白名单(不需要登录的)
     keepAliveList: [],  // 需要缓存的组件名称
     menuUrl: '/menu/getList',  // 菜单数据接口
@@ -33,5 +33,10 @@ export default {
     logoAutoSize: false,  // logo是否自适应宽度
     fixedLayout: true,  // 是否固定顶栏和侧栏
     colorfulIcon: false,  // 侧栏是否多彩图标
-    sideUniqueOpen: true  // 侧边栏是否只保持一个子菜单展开
+    sideUniqueOpen: true,  // 侧边栏是否只保持一个子菜单展开
+    configureWebpack: {
+        devServer: {
+          historyApiFallback: true
+        }
+      }
 }

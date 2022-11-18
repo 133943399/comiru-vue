@@ -16,41 +16,13 @@
 
 <script>
 // import uploadImage from '@/components/uploadImage
-import { mapGetters } from "vuex";
 export default {
   name: "SysUser",
   data() {
     return {
-      table: {url: '/teacher/followme', where: {}},  // 表格配置
-      choose: [],  // 表格选中数据
-      showEdit: false,  // 是否显示表单弹窗
-      editForm: {},  // 表单数据
-      editRules: {  // 表单验证规则
-        username: [
-          {required: true, message: '请输入用户账号', trigger: 'blur'}
-        ],
-        realname: [
-          {required: true, message: '请输入用户姓名', trigger: 'blur'}
-        ],
-        gender: [
-          {required: true, message: '请选择性别', trigger: 'blur'}
-        ],
-        password: [
-          {required: true, message: '请输入密码', trigger: 'blur'}
-        ]
-      },
-      roleList: [],  // 角色列表
-      langList: [],  // 语言列表
-      gameList: [],
-      levelList:[], // 职级列表
-      positionList:[], // 岗位列表
-
+      table: {url: '/user/teachers/follow', where: {}},  // 表格配置
     }
   },
-  computed: {
-    ...mapGetters(["permission"]),
-  },
-
   mounted() {  
   },
   methods: {

@@ -11,7 +11,7 @@
     <el-submenu index="user" popper-class="ele-menu-pop">
       <template slot="title">
         <!-- <el-avatar :src="user.avatar"/> -->
-        <span>{{ user.realname || '' }}</span>
+        <span>{{ user.realname || this.$store.state.user.user.name }}</span>
       </template>
       <el-menu-item index="logout" @click="logout"><i class="el-icon-switch-button"></i><span>退出登录</span></el-menu-item>
     </el-submenu>

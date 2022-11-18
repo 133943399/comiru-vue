@@ -5,12 +5,10 @@
       <ele-data-table ref="table" :config="table" :choose.sync="choose" height="calc(100vh - 315px)" highlight-current-row>
         <template slot-scope="{index}">
           <el-table-column type="selection" width="45" align="center" fixed="left"/>
-          <el-table-column prop="id" :index="index" label="编号" width="60" align="center" fixed="left" show-overflow-tooltip/>
-          <el-table-column prop="name" label="学生姓名" sortable="custom" show-overflow-tooltip min-width="110"/>
-          <el-table-column prop="email" label="邮箱" sortable="custom" show-overflow-tooltip min-width="110"/>
-          <el-table-column label="性别" sortable="custom" show-overflow-tooltip min-width="60">
-            <template slot-scope="{row}">{{row.gender==1?'男':'女'}}</template>
-          </el-table-column>
+          <el-table-column prop="uid" :index="index" label="编号" width="60" align="center" fixed="left" show-overflow-tooltip/>
+          <el-table-column prop="user.name" label="学生姓名" sortable="custom" show-overflow-tooltip min-width="110"/>
+          <el-table-column prop="school.name" label="学校" sortable="custom" show-overflow-tooltip min-width="110"/>
+          <el-table-column prop="user.email" label="邮箱" sortable="custom" show-overflow-tooltip min-width="110"/>
           <el-table-column label="操作" width="220px" align="center" :resizable="false" fixed="right">
             <template slot-scope="{row}">
                 <router-link :to="'/system/chat?id=' + row.id">发送消息</router-link>
@@ -27,7 +25,7 @@ export default {
   name: "SysStudent",
   data() {
     return {
-      table: {url: '/student', where: {}},  // 表格配置
+      table: {url: '/user/students', where: {}},  // 表格配置
       choose: [],  // 表格选中数据
       showEdit: false,  // 是否显示表单弹窗
     }

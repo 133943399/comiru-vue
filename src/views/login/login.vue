@@ -41,8 +41,8 @@ export default {
             loading: false,
             // 表单数据
             form: {
-                username: 't123@qq.com',
-                password: '123456',
+                username: '',
+                password: '',
                 remember: true
             },
             // 表单验证规则
@@ -67,9 +67,9 @@ export default {
                 this.loading = true;
 
                 this.$http.post('/auth/login', this.form).then(res => {
-                    const code = res.status;
-                    const data = res.data;
-                    const message = res.statusText;
+                    const data = res.data.data;
+                    const code = res.data.code;
+                    const message = res.data.message;
 
                     this.loading = false;
                     if (code === 200) {

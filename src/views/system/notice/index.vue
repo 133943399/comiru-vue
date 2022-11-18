@@ -29,13 +29,13 @@ export default {
     data() {
         return {
             // 输入框中的文字
-            inputMsg: "",
+            inputMsg: "通知不支持普通用户发送消息",
             // 会话内容
             taleList: msgList,
              // 组件配置
              config: {
                 img: "",
-                name: "聊天",
+                name: "通知公告",
                 dept: "",
                 callback: this.bindCover,
                 historyConfig: {
@@ -50,26 +50,25 @@ export default {
     methods: {
         // 输入框点击就发送或者回车触发的事件
         bindEnter() {
-            console.log("send to:" + this.$store.state.user.user.name);
-            let date = new Date
-            const msg = this.inputMsg;
-            if (!msg) return;
-            const msgObj = {
-                date: date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes(),
-                text: { text: msg },
-                mine: true,
-                name: "我",
-            };
-            this.$http.post('/push/message', { 'msg': msg, 'user_id': this.$route.query.id })
-            this.taleList.push(msgObj);
+            // console.log("send to:" + this.$store.state.user.user.name);
+            // let date = new Date
+            // const msg = this.inputMsg;
+            // if (!msg) return;
+            // const msgObj = {
+            //     date: date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes(),
+            //     text: { text: msg },
+            //     mine: true,
+            //     name: "我",
+            // };
+            // this.$http.post('/push/message', { 'msg': msg, 'user_id': this.$route.query.id })
+            // this.taleList.push(msgObj);
         },
 
     },
     mounted() {
         console.log(this.$store.state.user.user.id);
         
-        let listenStr = [this.$route.query.id,this.$store.state.user.user.id].join('-')
-        window.Echo.channel('message').listen('.'+ listenStr, (e) => {
+        window.Echo.channel('notice').listen('NoticeEvent', (e) => {
             this.taleList.push(e)
         });
     },

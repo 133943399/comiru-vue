@@ -14,28 +14,30 @@
                 highlight-current-row>
                 <template slot-scope="{index}">
                     <el-table-column type="selection" width="45" align="center" fixed="left" />
-                    <el-table-column prop="id" :index="index" label="编号" width="60" align="center" fixed="left"
+                    <el-table-column prop="sid" :index="index" label="编号" width="60" align="center" fixed="left"
                         show-overflow-tooltip />
-                    <el-table-column prop="name" label="学校名" sortable="custom" show-overflow-tooltip min-width="110" />
-                    <el-table-column prop="teacher.name" label="管理员" sortable="custom" show-overflow-tooltip
+                    <el-table-column prop="school.name" label="学校名" sortable="custom" show-overflow-tooltip
                         min-width="110" />
-                    <el-table-column prop="teacher.email" label="管理员邮箱" sortable="custom" show-overflow-tooltip
+                    <el-table-column label="角色" align="center" prop="status" :formatter="parseStatus" />
+                    <el-table-column prop="user.name" label="管理员" sortable="custom" show-overflow-tooltip
+                        min-width="110" />
+                    <el-table-column prop="user.email" label="管理员邮箱" sortable="custom" show-overflow-tooltip
                         min-width="110" />
                     <el-table-column prop="status" label="状态" sortable min-width="100">
                         <template slot-scope="{row}">
-                            <ele-dot :type="['warning', 'success'][row.status]" :ripple="row.status === 0"
-                                :text="['审核中', '已通过'][row.status]" />
+                            <ele-dot :type="['warning', 'success'][row.school.status]" :ripple="row.school.status === 0"
+                                :text="['审核中', '已通过'][row.school.status]" />
                         </template>
                     </el-table-column>
 
                     <el-table-column label="操作" width="220px" align="center" :resizable="false" fixed="right">
                         <template slot-scope="{row}">
-                            <el-link @click="edit(row.id, true)" icon="el-icon-edit" type="primary" :underline="false"
-                                v-if="row.school_teacher.type == 1 && row.status == 1">
+                            <el-link @click="edit(row.sid, true)" icon="el-icon-edit" type="primary" :underline="false"
+                                v-if="row.user.id == row.school.uid && row.school.status == 1">
                                 邀请老师
                             </el-link>
-                            <el-link @click="edit(row.id, false)" icon="el-icon-edit" type="primary" :underline="false"
-                                v-if="row.school_teacher.type == 1 && row.status == 1">
+                            <el-link @click="edit(row.sid, false)" icon="el-icon-edit" type="primary" :underline="false"
+                                v-if="row.user.id == row.school.uid && row.school.status == 1">
                                 创建学生
                             </el-link>
                         </template>
@@ -95,7 +97,6 @@
   
 <script>
 // import uploadImage from '@/components/uploadImage
-import { mapGetters } from "vuex";
 export default {
     name: "SysSc",
     data() {
@@ -111,12 +112,14 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["permission"]),
     },
     // components: {uploadImage},
     mounted() {
     },
     methods: {
+        parseStatus(row) {
+            return row.user.id == row.school.uid ? '管理员' : '普通教师';
+        },
         /* 显示编辑 */
         edit(id, type) {
             this.showEdit = true;
@@ -126,22 +129,21 @@ export default {
         /* 保存编辑 */
         save() {
             const id = this.editForm.id
-
+            
             let url
             if (this.editForm.type) {
                 url = "/school/invite"
             } else {
                 url = "/school/student"
-
             }
 
             this.$refs['editForm'].validate((valid) => {
                 if (valid) {
-                    const method = id ? 'put' : 'post'
                     const loading = this.$loading({ lock: true });
-                    this.$http[method](url + `${id ? '/' + id : ''}`, this.editForm).then(res => {
+                    this.$http['post'](url + `${id ? '/' + id : ''}`, this.editForm).then(res => {
                         loading.close();
-                        if (res.status === 200) {
+                        console.log(res.data.message);
+                        if (res.data.code === 200) {
                             this.showEdit = false;
                             this.$message({ type: 'success', message: res.data.message });
                             this.$refs.table.reload();
@@ -175,7 +177,6 @@ export default {
                         loading.close();
                         this.$message.error(e.message);
                     });
-
                 } else {
                     return false;
                 }

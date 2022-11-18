@@ -7,7 +7,7 @@
                 <el-input placeholder="请输入登录账号" v-model="form.name" prefix-icon="el-icon-user" clearable />
             </el-form-item>
             <el-form-item label="邮箱:" prop="email">
-                <el-input placeholder="请输入邮箱" v-model="form.email" prefix-icon="el-icon-user" clearable />
+                <el-input placeholder="请输入邮箱" v-model="form.email" prefix-icon="el-icon-user" clearable/>
             </el-form-item>
             <el-form-item label="新密码:" prop="password">
                 <el-input v-model="form.password" placeholder="请输入新密码" show-password />
@@ -15,6 +15,10 @@
             <el-form-item label="确认密码:" prop="password_confirmation">
                 <el-input v-model="form.password_confirmation" placeholder="请再次输入新密码" show-password />
             </el-form-item>
+
+            <el-input type="hidden" v-model="form.sid" placeholder=""/>
+
+
             <div class="el-form-item">
                 <el-button @click="doSubmit" :loading="loading" type="primary" size="medium">
                     {{ loading ? '注册中' : '注册' }}
@@ -40,10 +44,10 @@ export default {
             loading: false,
             // 表单数据
             form: {
-                name:'teacher',
-                email: 't' + Math.round(Math.random()*100) + '@qq.com',
-                password: '123456',
-                password_confirmation: '123456',
+                name:'',
+                email: '',
+                password: '',
+                password_confirmation: '',
             },
             // 表单验证规则
             rules: {
@@ -56,6 +60,9 @@ export default {
         };
     },
     mounted() {
+        this.form.email = this.$route.query.email
+        this.form.sid = this.$route.query.sid
+        
         if (this.$store.state.user.token)
             this.$router.push(this.$route.query.from || '/');
     },

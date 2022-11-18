@@ -13,6 +13,7 @@ Vue.use(VueAxios, axios);
 
 // axios.defaults.baseURL = process.env.VUE_APP_BASE_URL // setting.baseURL;
 axios.defaults.baseURL = 'https://test-comiru.herokuapp.com'
+// axios.defaults.baseURL = 'http://comiru.com'
 axios.defaults.headers.common[setting.tokenHeaderName] = store.state.user.token;
 
 /* 响应拦截器 */
