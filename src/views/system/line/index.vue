@@ -9,7 +9,6 @@ export default {
     methods: {
     },
     mounted() {
-
         this.$http.get('/login/line', this.form).then(res => {
             window.location.href = res.data.url
         }).catch(e => {
