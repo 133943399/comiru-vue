@@ -6,8 +6,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server.js",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "start": "node server.js"
   },
   "dependencies": {
     "@riophae/vue-treeselect": "^0.4.0",
