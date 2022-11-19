@@ -11,7 +11,7 @@
           <el-table-column prop="user.email" label="邮箱" sortable="custom" show-overflow-tooltip min-width="110"/>
           <el-table-column label="操作" width="220px" align="center" :resizable="false" fixed="right">
             <template slot-scope="{row}">
-                <router-link :to="'/system/chat?id=' + row.id">发送消息</router-link>
+                <router-link :to="'/system/chat?id=' + row.uid">发送消息</router-link>
             </template>
           </el-table-column>
         </template>

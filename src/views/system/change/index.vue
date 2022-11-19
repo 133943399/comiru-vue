@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: "SysStudent",
+    name: "SysChange",
     data() {
         return {
             table: { url: '/user/change_list', where: {} },  // 表格配置
