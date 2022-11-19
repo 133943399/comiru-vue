@@ -4,9 +4,9 @@
 export default {
     version: '1.0',
     name: 'comiru',  // 项目名称
-    baseURL: 'https://test-comiru.herokuapp.com',  // 接口地址
-    // baseURL: 'http://comiru.com',  // 接口地址
-    whiteList: ['/login', '/forget','/register','/line/login'],  // 路由白名单(不需要登录的)
+    // baseURL: 'https://test-comiru.herokuapp.com',  // 接口地址
+    baseURL: 'http://comiru.com',  // 接口地址
+    whiteList: ['/login', '/forget','/register','/line'],  // 路由白名单(不需要登录的)
     keepAliveList: [],  // 需要缓存的组件名称
     menuUrl: '/menu/getList',  // 菜单数据接口
     parseMenu: null,  // 自定义解析接口菜单数据
